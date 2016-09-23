@@ -10,6 +10,7 @@ RUN composer global config minimum-stability alpha
 RUN composer global require "hirak/prestissimo:^0.3"
 RUN composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition
 RUN rm -rf ./project-community-edition
+RUN rm -rf /root/.composer/cache/repo
 
 WORKDIR /srv/www
 
