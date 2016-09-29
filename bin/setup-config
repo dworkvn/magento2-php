@@ -1,0 +1,11 @@
+#!/bin/bash
+WWW_DIR=/srv/www
+
+if [ -d $WWW_DIR/bin ] && [ ! -f $WWW_DIR/bin/magento-php ]; then
+  ln $WWW_DIR/bin/magento /usr/local/bin/magento
+fi
+
+echo (crontab -l ; echo "*/1 * * * * su -c \"/usr/local/bin/php $WWW_DIR/bin/magento cron:run\" -s /bin/sh root > /proc/1/fd/2 2>&1") | crontab -
+
+# Start the cron service
+/usr/sbin/cron
